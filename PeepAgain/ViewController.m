@@ -20,13 +20,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.view.frame = [UIScreen mainScreen].bounds;
+    self.view.frame = CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height);
     self.view.backgroundColor = [UIColor blackColor];
     
     self.imageView.userInteractionEnabled = YES;
     self.imageView.hidden = YES;
-//    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    NSDictionary *viewsDictionary = @{@"imageView":self.imageView};
+    
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|[imageView]|" options:0 metrics:nil views:viewsDictionary];
+    [self.view addConstraints:constraints];
+    
     
     UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(punish:)];
     swipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
